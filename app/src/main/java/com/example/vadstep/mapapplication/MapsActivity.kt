@@ -150,6 +150,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, ClusterManager.OnC
                 .addOnFailureListener { snackbar(btn_add_pnt, R.string.not_saved) }
     }
 
+
     
     //get from firebaseDB
     private fun getFromFirebase() {
