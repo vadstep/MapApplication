@@ -151,7 +151,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, ClusterManager.OnC
     }
 
 
-    
+
     //get from firebaseDB
     private fun getFromFirebase() {
         FirebaseFirestore.getInstance().collection("MapMarkers")
