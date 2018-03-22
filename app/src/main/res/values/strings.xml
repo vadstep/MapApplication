@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Map Application</string>
+    <string name="title_activity_maps">You are welcome to add a marker!</string>
+    <string name="add_point">Add marker</string>
+    <string name="hint_name">Name</string>
+    <string name="marker_name_title">Add marker name</string>
+    <string name="name_not_empty">Name couldn\'t be empty!</string>
+    <string name="saved">Marker saved on server</string>
+    <string name="not_saved">Marker not saved on server</string>
+    <string name="fetched">Markers fetched from server</string>
+    <string name="not_fetched">Marker not fetched from server</string>
+</resources>

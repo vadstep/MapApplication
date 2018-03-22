@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <dimen name="standard_padding">16dp</dimen>
+    <dimen name="dialog_padding">8dp</dimen>
+    <dimen name="add_button_padding_bottom">-100dp</dimen>
+    <dimen name="add_animation_padding">116dp</dimen>
+</resources>
