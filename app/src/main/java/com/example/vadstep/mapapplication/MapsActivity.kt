@@ -2,6 +2,7 @@ package com.example.vadstep.mapapplication
 
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
+import android.location.Geocoder
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.View
@@ -25,6 +26,7 @@ import kotlinx.android.synthetic.main.activity_maps.*
 import kotlinx.coroutines.experimental.NonCancellable.cancel
 import org.jetbrains.anko.*
 import org.jetbrains.anko.design.snackbar
+import java.util.*
 import java.util.concurrent.TimeUnit
 
 
@@ -82,7 +84,9 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, ClusterManager.OnC
         mMap.setOnCameraIdleListener(mClusterManager)
         mMap.setInfoWindowAdapter(mClusterManager.markerManager)
         mClusterManager.setOnClusterItemClickListener {
-            (mClusterManager.renderer as CustomRenderer).getMarker(it).showInfoWindow();
+            val marker = (mClusterManager.renderer as CustomRenderer).getMarker(it)
+            marker.showInfoWindow()
+            getPlaceDetails(marker.position.latitude, marker.position.longitude)
             false
         }
     }
@@ -151,7 +155,6 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, ClusterManager.OnC
     }
 
 
-
     //get from firebaseDB
     private fun getFromFirebase() {
         FirebaseFirestore.getInstance().collection("MapMarkers")
@@ -176,5 +179,19 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, ClusterManager.OnC
         override fun onBeforeClusterItemRendered(item: MyClusterItem, markerOptions: MarkerOptions) {
             markerOptions.title(item.name)
         }
+    }
+
+    private fun getPlaceDetails(lat: Double, lng: Double) {
+        val addresses = Geocoder(this, Locale.getDefault()).getFromLocation(lat, lng, 1)
+        val result = StringBuilder();
+        addresses[0].let {
+            for (i in 0..2) {
+                it.getAddressLine(i).let {
+                    if(it!=null)
+                    result.append(it).append(" ")
+                }
+            }
+        }
+        snackbar(btn_add_pnt, result.toString())
     }
 }
